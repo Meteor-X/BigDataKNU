@@ -80,6 +80,7 @@ Xspacing в змінну st та виведіть її. Це інтервал ч
     h5f = H5Fopen("l2.hdf5")
     gpsStart <- h5f$"meta/GPSstart"
     duration <- h5f$"meta/Duration"
+    H5close()
     ```
     
     ```cmd
