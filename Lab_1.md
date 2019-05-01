@@ -30,11 +30,11 @@ https://www.dropbox.com/s/dijv0rlwo4mryv5/PUMSDataDict06.pdf?dl=0
     ```R
     download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv","save_2.csv", "auto", TRUE,"wb")
     save_2 <- read.csv("save_2.csv")
-    nrow(save_2[save_2$VAL == 24,])
+    sum(save_2$VAL == 24, na.rm = TRUE)
     ```
     
     ```cmd
-        [1] 2129
+    [1] 53
     ```
 3. Зчитайте xml файл за посиланням
 http://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml
