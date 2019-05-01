@@ -1,0 +1,57 @@
+# Big Data Lab 1 Завантаження та зчитування даних.
+1. За допомогою download.file() завантажте любий excel файл з порталу
+http://data.gov.ua та зчитайте його (xls, xlsx – бінарні формати, тому
+встановить mode = “wb”. Виведіть перші 6 строк отриманого фрейму
+даних.
+    ```R
+    download.file("https://data.gov.ua/dataset/2cde453d-a726-40e8-95f5-03eb05d4bfcc/resource/5b7b80af-7b7f-401f-8ea7-ad73c11596bd/download/pasport_naboru_danyh.xlsx","save_1.xlsx", "auto", TRUE,"wb")
+    save_1 <- read_xlsx("save_1.xlsx")
+    head(save_1, n = 6)
+    ```
+    
+    ```cmd
+    # A tibble: 6 x 3
+      `Назва набору`          `Інформація про АЕС України`                                                          ...3 
+      <chr>                   <chr>                                                                                 <chr>
+    1 Шаблон назв файлів      info_aes_blocks_ДД_ММ_РРРР                                                            NA   
+    2 Періодичність оприлюдн… У випадку оновлення даних, але не рідше, ніж 1 раз на квартал до 25 числа місяця, на… NA   
+    3 NA                      NA                                                                                    NA   
+    4 Структура набору:       NA                                                                                    NA   
+    5 Назва поля              Назва поля українською                                                                Опис 
+    6 plant                   Назва станції                                                                         Текст
+    ```
+2. За допомогою download.file() завантажте файл getdata_data_ss06hid.csv за
+посиланням
+https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv та
+завантажте дані в R. Code book, що пояснює значення змінних
+знаходиться за посиланням
+https://www.dropbox.com/s/dijv0rlwo4mryv5/PUMSDataDict06.pdf?dl=0
+Необхідно знайти, скільки property мають value $1000000+
+    ```R
+    download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv","save_2.csv", "auto", TRUE,"wb")
+    save_2 <- read.csv("save_2.csv")
+    nrow(save_2[save_2$VAL == 24,])
+    ```
+    
+    ```cmd
+        [1] 2129
+    ```
+3. Зчитайте xml файл за посиланням
+http://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml
+Скільки ресторанів мають zipcode 21231?
+    ```R
+    download.file("http://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml","save_3.xml", "auto", TRUE,"wb")
+    save_3 <- xmlToList(xmlParse("save_3.xml"))
+    
+    z = 0;
+    for(row in save_3[["row"]]){
+      if(row$zipcode == "21231"){
+        z<- z+1;
+      }
+    }
+    z;
+    ```
+    
+    ```cmd
+    [1] 127
+    ```
