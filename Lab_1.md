@@ -41,15 +41,8 @@ http://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml
 Скільки ресторанів мають zipcode 21231?
     ```R
     download.file("http://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml","save_3.xml", "auto", TRUE,"wb")
-    save_3 <- xmlToList(xmlParse("save_3.xml"))
-    
-    z = 0;
-    for(row in save_3[["row"]]){
-      if(row$zipcode == "21231"){
-        z<- z+1;
-      }
-    }
-    z;
+    save_3 <- xmlRoot(xmlTreeParse("save_3.xml", useInternal = TRUE ))
+    sum(xpathSApply(save_3, "//zipcode", xmlValue) == 21231)
     ```
     
     ```cmd
